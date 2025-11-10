@@ -91,9 +91,23 @@ const AppLayout: React.FC = () => (
         <span style={{ color: "#8b8fa3", fontSize: "12px" }}>
           🔒 Provably Fair Game
         </span>
-        <span style={{ color: "#8b8fa3", fontSize: "11px" }}>
-          Powered by Stellar • Built with Scaffold Stellar
-        </span>
+        <div style={{ 
+          display: "flex", 
+          alignItems: "center", 
+          gap: "8px",
+          fontSize: "11px"
+        }}>
+          <span style={{ color: "#8b8fa3" }}>Powered by Stellar • Built with Scaffold Stellar</span>
+          <span style={{ color: "#3a3f5c" }}>•</span>
+          <span style={{ 
+            fontWeight: "700",
+            background: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent"
+          }}>
+            🎈 BalloonFly
+          </span>
+        </div>
       </div>
     </Layout.Footer>
   </main>
