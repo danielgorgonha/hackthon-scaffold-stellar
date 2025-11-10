@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 interface BettingPanelProps {
-  panelNumber: number;
   isActive?: boolean;
   onBet?: (amount: number) => void;
   onCashOut?: () => void;
@@ -9,7 +8,6 @@ interface BettingPanelProps {
 }
 
 const BettingPanel: React.FC<BettingPanelProps> = ({ 
-  panelNumber, 
   isActive = false,
   onBet,
   onCashOut,

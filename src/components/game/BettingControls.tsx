@@ -69,14 +69,12 @@ const BettingControls: React.FC = () => {
         margin: "0 auto"
       }}>
         <BettingPanel 
-          panelNumber={1}
           isActive={hasActiveBet || false}
           onBet={handleBet1}
           onCashOut={handleCashOut1}
           loading={loading}
         />
         <BettingPanel 
-          panelNumber={2}
           isActive={hasActiveBet || false}
           onBet={handleBet2}
           onCashOut={handleCashOut2}

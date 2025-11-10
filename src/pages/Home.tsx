@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Layout, Text } from "@stellar/design-system";
+import { Layout } from "@stellar/design-system";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useWallet } from "../hooks/useWallet";
 

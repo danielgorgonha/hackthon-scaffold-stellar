@@ -89,7 +89,9 @@ export const useBalloonFly = (): UseBalloonFlyReturn => {
   const fetchPool = useCallback(async () => {
     try {
       const poolData = await balloonFlyClient.get_pool();
-      setPool(poolData.result);
+      if (poolData.result) {
+        setPool(poolData.result as unknown as Pool);
+      }
     } catch (err) {
       console.error("Error fetching pool:", err);
     }
@@ -99,13 +101,16 @@ export const useBalloonFly = (): UseBalloonFlyReturn => {
   const fetchCurrentRound = useCallback(async (roundId: bigint) => {
     try {
       const roundData = await balloonFlyClient.get_round({ round_id: roundId });
-      setCurrentRound(roundData.result);
-      
-      // Update flying state based on round status
-      if (roundData.result.status === RoundStatus.InProgress) {
-        setIsFlying(true);
-      } else {
-        setIsFlying(false);
+      if (roundData.result) {
+        const round = roundData.result as unknown as Round;
+        setCurrentRound(round);
+        
+        // Update flying state based on round status
+        if (round.status === RoundStatus.InProgress) {
+          setIsFlying(true);
+        } else {
+          setIsFlying(false);
+        }
       }
     } catch (err) {
       console.error("Error fetching round:", err);
@@ -145,9 +150,11 @@ export const useBalloonFly = (): UseBalloonFlyReturn => {
       
       // Fetch the bet details
       if (result.result) {
-        const betId = result.result;
+        const betId = result.result as unknown as bigint;
         const betData = await balloonFlyClient.get_bet({ bet_id: betId });
-        setUserBet(betData.result);
+        if (betData.result) {
+          setUserBet(betData.result as unknown as Bet);
+        }
       }
 
       // Refresh round data
@@ -193,7 +200,9 @@ export const useBalloonFly = (): UseBalloonFlyReturn => {
       
       // Refresh bet data
       const betData = await balloonFlyClient.get_bet({ bet_id: userBet.id });
-      setUserBet(betData.result);
+      if (betData.result) {
+        setUserBet(betData.result as unknown as Bet);
+      }
 
       // Refresh round data
       if (currentRound) {

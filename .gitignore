@@ -39,7 +39,11 @@ lerna-debug.log*
 packages/*
 # if you have other workspace packages, add them here
 !packages/.gitkeep
+# Allow balloonfly contract client for deployment
+!packages/balloonfly/
 
 # generated contract client imports
 src/contracts/*
 !src/contracts/util.ts
+# Allow balloonfly contract import for deployment
+!src/contracts/balloonfly.ts

@@ -49,11 +49,7 @@ export function useSubscription(
           paging[id].lastLedgerStart = latestLedgerState.sequence;
         }
 
-        const response = await server.getEvents({
-          startLedger: !paging[id].pagingToken
-            ? paging[id].lastLedgerStart
-            : undefined,
-          cursor: paging[id].pagingToken,
+        const request: any = {
           filters: [
             {
               contractIds: [contractId],
@@ -62,7 +58,15 @@ export function useSubscription(
             },
           ],
           limit: 10,
-        });
+        };
+
+        if (paging[id].pagingToken) {
+          request.cursor = paging[id].pagingToken;
+        } else if (paging[id].lastLedgerStart) {
+          request.startLedger = paging[id].lastLedgerStart;
+        }
+
+        const response = await server.getEvents(request);
 
         paging[id].pagingToken = undefined;
         if (response.latestLedger) {
@@ -78,7 +82,7 @@ export function useSubscription(
                 error,
               );
             } finally {
-              paging[id].pagingToken = event.pagingToken;
+              paging[id].pagingToken = (event as any).pagingToken || undefined;
             }
           });
         }

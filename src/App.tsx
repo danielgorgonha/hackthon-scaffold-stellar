@@ -10,29 +10,8 @@ const AppLayout: React.FC = () => (
   <main style={{ background: "#0a0e1a", minHeight: "100vh" }}>
     <Layout.Header
       projectId=""
-      projectTitle=""
+      projectTitle="🎈 BalloonFly"
       hasThemeSwitch={false}
-      contentLeft={
-        <NavLink to="/" style={{ textDecoration: "none" }}>
-          <div style={{ 
-            display: "flex", 
-            alignItems: "center", 
-            gap: "8px",
-            fontSize: "20px",
-            fontWeight: "800",
-            cursor: "pointer"
-          }}>
-            <span style={{ fontSize: "24px" }}>🎈</span>
-            <span style={{
-              background: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent"
-            }}>
-              BalloonFly
-            </span>
-          </div>
-        </NavLink>
-      }
       contentRight={
         <>
           <nav style={{ display: "flex", gap: "8px", alignItems: "center" }}>
