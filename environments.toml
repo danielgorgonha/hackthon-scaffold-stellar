@@ -9,9 +9,7 @@ name = "me" # Required. Keys for this account will be saved to `./.stellar/ident
 default = true # Optional. Whether to use this account as the `--source` for commands that need one.
 
 [development.contracts]
-# Contracts will be added here
-# Example:
-# balloonfly = { client = true, constructor_args = "--admin me" }
+balloonfly = { client = true, constructor_args = "--admin me" }
 
 # Coming Soon: Specify live contracts to bind & import in this project using the given name.
 # During initialization, these contracts will also be "spooned" into the development network,
