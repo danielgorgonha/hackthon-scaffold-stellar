@@ -1,4 +1,4 @@
-import * as Client from 'balloonfly';
+import * as Client from '../../packages/balloonfly/dist/index';
 import { rpcUrl } from './util';
 
 export default new Client.Client({
