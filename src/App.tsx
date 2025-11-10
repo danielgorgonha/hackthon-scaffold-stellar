@@ -8,26 +8,29 @@ import Debugger from "./pages/Debugger.tsx";
 const AppLayout: React.FC = () => (
   <main style={{ background: "#0a0e1a", minHeight: "100vh" }}>
     <Layout.Header
-      projectId="BalloonFly"
+      projectId=""
       projectTitle=""
       hasThemeSwitch={false}
       contentLeft={
-        <div style={{ 
-          display: "flex", 
-          alignItems: "center", 
-          gap: "8px",
-          fontSize: "20px",
-          fontWeight: "800"
-        }}>
-          <span style={{ fontSize: "24px" }}>🎈</span>
-          <span style={{
-            background: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent"
+        <NavLink to="/" style={{ textDecoration: "none" }}>
+          <div style={{ 
+            display: "flex", 
+            alignItems: "center", 
+            gap: "8px",
+            fontSize: "20px",
+            fontWeight: "800",
+            cursor: "pointer"
           }}>
-            BalloonFly
-          </span>
-        </div>
+            <span style={{ fontSize: "24px" }}>🎈</span>
+            <span style={{
+              background: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent"
+            }}>
+              BalloonFly
+            </span>
+          </div>
+        </NavLink>
       }
       contentRight={
         <>
