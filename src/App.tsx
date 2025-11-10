@@ -8,64 +8,22 @@ import Debugger from "./pages/Debugger.tsx";
 const AppLayout: React.FC = () => (
   <main style={{ background: "#0a0e1a", minHeight: "100vh" }}>
     <Layout.Header
-      hasThemeSwitch={false}
-      contentLeft={
-        <div style={{ 
-          display: "flex", 
-          alignItems: "center", 
-          gap: "8px",
-          fontSize: "20px",
-          fontWeight: "800"
-        }}>
-          <span style={{ fontSize: "24px" }}>🎈</span>
-          <span style={{
-            background: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent"
-          }}>
-            BalloonFly
-          </span>
-        </div>
-      }
+      projectId="BalloonFly"
+      projectTitle="BalloonFly"
       contentRight={
         <>
-          <nav style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-            <NavLink
-              to="/"
-              style={{ textDecoration: "none" }}
-            >
-              {({ isActive }) => (
-                <Button
-                  variant="tertiary"
-                  size="md"
-                  disabled={isActive}
-                >
-                  🏠 Home
-                </Button>
-              )}
-            </NavLink>
-            <NavLink
-              to="/game"
-              style={{ textDecoration: "none" }}
-            >
-              {({ isActive }) => (
-                <Button
-                  variant="tertiary"
-                  size="md"
-                  disabled={isActive}
-                >
-                  🎮 Play
-                </Button>
-              )}
-            </NavLink>
+          <nav>
             <NavLink
               to="/debug"
-              style={{ textDecoration: "none" }}
+              style={{
+                textDecoration: "none",
+              }}
             >
               {({ isActive }) => (
                 <Button
                   variant="tertiary"
                   size="md"
+                  onClick={() => (window.location.href = "/debug")}
                   disabled={isActive}
                 >
                   <Icon.Code02 size="md" />

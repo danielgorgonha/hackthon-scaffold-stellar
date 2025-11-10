@@ -8,7 +8,7 @@
     "start": "concurrently \"stellar scaffold watch --build-clients\" \"vite\"",
     "build": "tsc -b && vite build",
     "install:contracts": "npm install --workspace=packages && npm run build --workspace=packages",
-    "preview": "vite preview",
+    "preview": "vite",
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky"
