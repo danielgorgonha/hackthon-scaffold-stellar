@@ -1,11 +1,11 @@
 import React from "react";
-import { useBalloonFly, RoundStatus } from "../../hooks/useBalloonFly";
+import { useBalloonFlyContext } from "../../contexts/BalloonFlyContext";
 
 const GameCanvas: React.FC = () => {
-  const { currentMultiplier, isFlying, currentRound } = useBalloonFly();
+  const { currentMultiplier, isFlying, currentRound } = useBalloonFlyContext();
   
-  const balloonEmoji = isFlying ? "🎈" : currentRound?.status === RoundStatus.Ended ? "💥" : "🎈";
-  const statusMessage = !isFlying && currentRound?.status === RoundStatus.Waiting 
+  const balloonEmoji = isFlying ? "🎈" : currentRound?.status === "Ended" ? "💥" : "🎈";
+  const statusMessage = !isFlying && currentRound?.status === "Waiting" 
     ? "🎈 Waiting for bets..." 
     : "";
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useBalloonFly } from "../../hooks/useBalloonFly";
+import { useBalloonFlyContext } from "../../contexts/BalloonFlyContext";
 
 const BetsSidebar: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"bets" | "previous" | "top">("bets");
-  const { pool, formatXLM, currentRound } = useBalloonFly();
+  const { pool, formatXLM, currentRound } = useBalloonFlyContext();
 
   const mockBets = [
     { player: "GBZXN...MADI", amount: 10.0, multiplier: null, payout: null, avatar: "🎈" },

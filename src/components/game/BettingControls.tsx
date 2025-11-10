@@ -1,9 +1,9 @@
 import React from "react";
 import BettingPanel from "./BettingPanel";
-import { useBalloonFly, BetStatus } from "../../hooks/useBalloonFly";
+import { useBalloonFlyContext } from "../../contexts/BalloonFlyContext";
 
 const BettingControls: React.FC = () => {
-  const { placeBet, cashOut, userBet, loading, error, isFlying } = useBalloonFly();
+  const { placeBet, cashOut, userBet, loading, error, isFlying } = useBalloonFlyContext();
 
   const handleBet1 = async (amount: number) => {
     try {
@@ -37,7 +37,7 @@ const BettingControls: React.FC = () => {
     }
   };
 
-  const hasActiveBet = userBet && userBet.status === BetStatus.Active && isFlying;
+  const hasActiveBet = userBet && userBet.status === "Active" && isFlying;
 
   return (
     <div style={{
