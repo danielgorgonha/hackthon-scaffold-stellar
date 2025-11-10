@@ -8,8 +8,6 @@ import Debugger from "./pages/Debugger.tsx";
 const AppLayout: React.FC = () => (
   <main style={{ background: "#0a0e1a", minHeight: "100vh" }}>
     <Layout.Header
-      projectId="BalloonFly"
-      projectTitle=""
       hasThemeSwitch={false}
       contentLeft={
         <div style={{ 
