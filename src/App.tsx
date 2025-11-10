@@ -6,24 +6,68 @@ import Home from "./pages/Home";
 import Debugger from "./pages/Debugger.tsx";
 
 const AppLayout: React.FC = () => (
-  <main>
+  <main style={{ background: "#0a0e1a", minHeight: "100vh" }}>
     <Layout.Header
-      projectId="My App"
-      projectTitle="My App"
+      projectId="BalloonFly"
+      projectTitle=""
+      hasThemeSwitch={false}
+      contentLeft={
+        <div style={{ 
+          display: "flex", 
+          alignItems: "center", 
+          gap: "8px",
+          fontSize: "20px",
+          fontWeight: "800"
+        }}>
+          <span style={{ fontSize: "24px" }}>🎈</span>
+          <span style={{
+            background: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent"
+          }}>
+            BalloonFly
+          </span>
+        </div>
+      }
       contentRight={
         <>
-          <nav>
+          <nav style={{ display: "flex", gap: "8px", alignItems: "center" }}>
             <NavLink
-              to="/debug"
-              style={{
-                textDecoration: "none",
-              }}
+              to="/"
+              style={{ textDecoration: "none" }}
             >
               {({ isActive }) => (
                 <Button
                   variant="tertiary"
                   size="md"
-                  onClick={() => (window.location.href = "/debug")}
+                  disabled={isActive}
+                >
+                  🏠 Home
+                </Button>
+              )}
+            </NavLink>
+            <NavLink
+              to="/game"
+              style={{ textDecoration: "none" }}
+            >
+              {({ isActive }) => (
+                <Button
+                  variant="tertiary"
+                  size="md"
+                  disabled={isActive}
+                >
+                  🎮 Play
+                </Button>
+              )}
+            </NavLink>
+            <NavLink
+              to="/debug"
+              style={{ textDecoration: "none" }}
+            >
+              {({ isActive }) => (
+                <Button
+                  variant="tertiary"
+                  size="md"
                   disabled={isActive}
                 >
                   <Icon.Code02 size="md" />
@@ -38,17 +82,19 @@ const AppLayout: React.FC = () => (
     />
     <Outlet />
     <Layout.Footer>
-      <span>
-        © {new Date().getFullYear()} My App. Licensed under the{" "}
-        <a
-          href="http://www.apache.org/licenses/LICENSE-2.0"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Apache License, Version 2.0
-        </a>
-        .
-      </span>
+      <div style={{ 
+        display: "flex", 
+        justifyContent: "space-between", 
+        alignItems: "center",
+        width: "100%"
+      }}>
+        <span style={{ color: "#8b8fa3", fontSize: "12px" }}>
+          🔒 Provably Fair Game
+        </span>
+        <span style={{ color: "#8b8fa3", fontSize: "11px" }}>
+          Powered by Stellar • Built with Scaffold Stellar
+        </span>
+      </div>
     </Layout.Footer>
   </main>
 );
@@ -61,6 +107,7 @@ function App() {
         <Route path="/debug" element={<Debugger />} />
         <Route path="/debug/:contractName" element={<Debugger />} />
       </Route>
+      {/* Rota /game será criada depois */}
     </Routes>
   );
 }
