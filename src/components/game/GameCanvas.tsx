@@ -1,50 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useBalloonFly, RoundStatus } from "../../hooks/useBalloonFly";
 
 const GameCanvas: React.FC = () => {
-  const [multiplier, setMultiplier] = useState(1.0);
-  const [isFlying, setIsFlying] = useState(false);
-  const [balloonEmoji, setBalloonEmoji] = useState("🎈");
-  const [statusMessage, setStatusMessage] = useState("🎈 Waiting for bets...");
+  const { currentMultiplier, isFlying, currentRound } = useBalloonFly();
+  
+  const balloonEmoji = isFlying ? "🎈" : currentRound?.status === RoundStatus.Ended ? "💥" : "🎈";
+  const statusMessage = !isFlying && currentRound?.status === RoundStatus.Waiting 
+    ? "🎈 Waiting for bets..." 
+    : "";
 
   const getMultiplierColor = (mult: number) => {
     if (mult < 2.0) return "#3B82F6";
     if (mult < 10.0) return "#A855F7";
     return "#EF4444";
   };
-
-  useEffect(() => {
-    // Simulate game loop
-    const startGame = () => {
-      setIsFlying(true);
-      setStatusMessage("");
-      setBalloonEmoji("🎈");
-      setMultiplier(1.0);
-      
-      const interval = setInterval(() => {
-        setMultiplier((prev) => {
-          const newMult = prev + 0.01;
-          
-          // Random crash
-          if (newMult >= 5.0 && Math.random() < 0.02) {
-            clearInterval(interval);
-            setBalloonEmoji("💥");
-            setIsFlying(false);
-            
-            setTimeout(() => {
-              setMultiplier(1.0);
-              setBalloonEmoji("🎈");
-              setStatusMessage("🎈 Waiting for bets...");
-              setTimeout(startGame, 3000);
-            }, 2000);
-          }
-          
-          return newMult;
-        });
-      }, 100);
-    };
-
-    setTimeout(startGame, 3000);
-  }, []);
 
   return (
     <div style={{
@@ -63,12 +32,12 @@ const GameCanvas: React.FC = () => {
         transform: "translate(-50%, -50%)",
         fontSize: "140px",
         fontWeight: 900,
-        color: getMultiplierColor(multiplier),
-        textShadow: `0 0 40px ${getMultiplierColor(multiplier)}`,
+        color: getMultiplierColor(currentMultiplier),
+        textShadow: `0 0 40px ${getMultiplierColor(currentMultiplier)}`,
         zIndex: 10,
         transition: "all 0.1s"
       }}>
-        {multiplier.toFixed(2)}x
+        {currentMultiplier.toFixed(2)}x
       </div>
 
       {/* Balloon */}
@@ -77,9 +46,9 @@ const GameCanvas: React.FC = () => {
         bottom: "30%",
         left: "35%",
         fontSize: "120px",
-        filter: `drop-shadow(0 0 20px ${getMultiplierColor(multiplier)})`,
-        color: getMultiplierColor(multiplier),
-        animation: balloonEmoji === "🎈" ? "float 3s ease-in-out infinite" : "none"
+        filter: `drop-shadow(0 0 20px ${getMultiplierColor(currentMultiplier)})`,
+        color: getMultiplierColor(currentMultiplier),
+        animation: balloonEmoji === "🎈" && isFlying ? "float 3s ease-in-out infinite" : "none"
       }}>
         {balloonEmoji}
       </div>
@@ -136,8 +105,27 @@ const GameCanvas: React.FC = () => {
             </div>
           ))}
         </div>
-        <span style={{ fontSize: "16px", fontWeight: 700, color: "#fff" }}>2,367</span>
+        <span style={{ fontSize: "16px", fontWeight: 700, color: "#fff" }}>
+          {currentRound?.bet_count || 0}
+        </span>
       </div>
+
+      {/* Round Info */}
+      {currentRound && (
+        <div style={{
+          position: "absolute",
+          bottom: "20px",
+          left: "20px",
+          background: "rgba(30, 33, 48, 0.9)",
+          padding: "8px 12px",
+          borderRadius: "8px",
+          backdropFilter: "blur(10px)",
+          fontSize: "12px",
+          color: "#8b8fa3"
+        }}>
+          Round #{currentRound.id.toString()}
+        </div>
+      )}
 
       <style>{`
         @keyframes float {
@@ -154,4 +142,3 @@ const GameCanvas: React.FC = () => {
 };
 
 export default GameCanvas;
-

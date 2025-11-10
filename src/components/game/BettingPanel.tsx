@@ -5,13 +5,15 @@ interface BettingPanelProps {
   isActive?: boolean;
   onBet?: (amount: number) => void;
   onCashOut?: () => void;
+  loading?: boolean;
 }
 
 const BettingPanel: React.FC<BettingPanelProps> = ({ 
   panelNumber, 
   isActive = false,
   onBet,
-  onCashOut 
+  onCashOut,
+  loading = false
 }) => {
   const [betAmount, setBetAmount] = useState(1.0);
   const [activeTab, setActiveTab] = useState<"manual" | "auto">("manual");
@@ -228,6 +230,7 @@ const BettingPanel: React.FC<BettingPanelProps> = ({
         <div style={{ flex: 1 }}>
           <button
             onClick={handleAction}
+            disabled={loading}
             style={{
               width: "100%",
               padding: "18px",
@@ -239,13 +242,14 @@ const BettingPanel: React.FC<BettingPanelProps> = ({
               color: "#fff",
               fontSize: "14px",
               fontWeight: 700,
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
               transition: "all 0.2s",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               gap: "4px",
-              animation: isActive ? "pulse 1s ease-in-out infinite" : "none"
+              animation: isActive ? "pulse 1s ease-in-out infinite" : "none",
+              opacity: loading ? 0.6 : 1
             }}
             onMouseEnter={(e) => {
               if (!isActive) {
@@ -265,7 +269,7 @@ const BettingPanel: React.FC<BettingPanelProps> = ({
               textTransform: "uppercase",
               letterSpacing: "0.5px"
             }}>
-              {isActive ? "💰 Cash Out Now!" : "Bet"}
+              {loading ? "Processing..." : isActive ? "💰 Cash Out Now!" : "Bet"}
             </span>
             <span style={{
               fontSize: "18px",

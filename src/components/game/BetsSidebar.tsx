@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useBalloonFly } from "../../hooks/useBalloonFly";
 
 const BetsSidebar: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"bets" | "previous" | "top">("bets");
+  const { pool, formatXLM, currentRound } = useBalloonFly();
 
   const mockBets = [
     { player: "GBZXN...MADI", amount: 10.0, multiplier: null, payout: null, avatar: "🎈" },
@@ -84,10 +86,12 @@ const BetsSidebar: React.FC = () => {
               </div>
             ))}
           </div>
-          <span style={{ fontSize: "24px", fontWeight: 700, color: "#fff" }}>30,887.08</span>
+          <span style={{ fontSize: "24px", fontWeight: 700, color: "#fff" }}>
+            {pool ? formatXLM(pool.total_payouts) : "0.00"}
+          </span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#8b8fa3" }}>
-          <span><strong style={{ color: "#fff" }}>1746/4471</strong> Bets</span>
+          <span><strong style={{ color: "#fff" }}>{currentRound?.bet_count || 0}</strong> Bets</span>
           <span>Total Prize XLM</span>
         </div>
         <div style={{
